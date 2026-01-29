@@ -1,0 +1,29 @@
+<odoo>
+  <template id="track_page" name="Shipment Tracking">
+    <t t-call="website.layout">
+      <div class="container mt-5">
+
+        <h2>تتبع شحنتك</h2>
+
+        <form action="/track/result" method="get">
+          <input type="text" name="tracking_code"
+                 placeholder="أدخل رقم التتبع"
+                 class="form-control mb-3" required/>
+          <button class="btn btn-primary">تتبع</button>
+        </form>
+
+        <t t-if="picking">
+          <hr/>
+          <h4>حالة الشحنة</h4>
+          <p><strong>رقم التتبع:</strong> <t t-esc="tracking_code"/></p>
+          <p><strong>الحالة:</strong> <t t-esc="picking.x_shipment_state"/></p>
+        </t>
+
+        <t t-if="tracking_code and not picking">
+          <p class="text-danger mt-3">رقم التتبع غير صحيح</p>
+        </t>
+
+      </div>
+    </t>
+  </template>
+</odoo>
